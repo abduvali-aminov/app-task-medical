@@ -16,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "patients_medication")
-public class PatientMedication implements Serializable {
+public class PatientMedication extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +27,6 @@ public class PatientMedication implements Serializable {
     @ManyToOne(optional = false)
     private Patient patient;
 
-    @CreationTimestamp
     @Column(nullable = false)
     private Date dateTimeAdministered;
 

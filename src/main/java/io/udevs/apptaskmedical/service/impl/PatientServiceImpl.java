@@ -36,6 +36,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public ResponseMessage delete(Long id) {
         if (patientRepository.findById(id).isPresent()){
+            patientRepository.deleteById(id);
             return new ResponseMessage("Patient deleted!!!");
         }else{
             return new ResponseMessage("Patient not found");
