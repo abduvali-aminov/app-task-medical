@@ -2,6 +2,8 @@ package io.udevs.apptaskmedical.service;
 
 import io.udevs.apptaskmedical.entity.User;
 import io.udevs.apptaskmedical.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class CustomUserDetailService implements UserDetailsService {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(CustomUserDetailService.class);
     private final UserRepository userRepository;
 
     public CustomUserDetailService(UserRepository userRepository) {
@@ -26,6 +30,8 @@ public class CustomUserDetailService implements UserDetailsService {
         return new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
+                LOGGER.debug(user
+                        .getRoles().toString());
                 return user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
             }
 

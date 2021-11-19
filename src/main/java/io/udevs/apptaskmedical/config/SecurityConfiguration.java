@@ -1,5 +1,6 @@
 package io.udevs.apptaskmedical.config;
 
+import io.udevs.apptaskmedical.entity.Patient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -22,8 +23,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth
+                .inMemoryAuthentication()
+                .withUser("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN")
+                .and()
+                .withUser("patient").password(passwordEncoder().encode("patient123")).roles("PATIENT");
     }
 
     @Override
@@ -36,7 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/appointment").hasRole("ADMIN")
+                .antMatchers("/api/v1/*").hasRole("ADMIN")
+                .antMatchers("/api/v1/appointment", "/api/v1/medication").hasAnyRole("ADMIN", "PATIENT")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
