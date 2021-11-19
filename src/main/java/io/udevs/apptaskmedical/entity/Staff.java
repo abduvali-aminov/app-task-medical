@@ -36,5 +36,6 @@ public class Staff extends BaseEntity{
     @Column(nullable = false)
     private String qualifications;
 
-//    private String otherDetails;
+    @OneToOne
+    private User user;
 }

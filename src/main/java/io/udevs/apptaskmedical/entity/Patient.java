@@ -36,5 +36,6 @@ public class Patient extends BaseEntity {
     @Column(nullable = false)
     private String address;
 
-//    private String otherDetails;
+    @OneToOne
+    private User user;
 }

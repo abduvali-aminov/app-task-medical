@@ -1,12 +1,12 @@
 package io.udevs.apptaskmedical.entity;
 
+import io.udevs.apptaskmedical.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -27,6 +27,7 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 }

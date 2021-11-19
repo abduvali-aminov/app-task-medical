@@ -1,6 +1,7 @@
 package io.udevs.apptaskmedical.config;
 
 import io.udevs.apptaskmedical.entity.Patient;
+import io.udevs.apptaskmedical.enums.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -41,8 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/*").hasRole("ADMIN")
-                .antMatchers("/api/v1/appointment", "/api/v1/medication").hasAnyRole("ADMIN", "PATIENT")
+                .antMatchers("/api/v1/appointment", "/api/v1/medication").hasAnyRole(Role.ADMIN.toString(), Role.PATIENT.toString())
+                .antMatchers("/api/v1/*").hasRole(Role.ADMIN.toString())
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
