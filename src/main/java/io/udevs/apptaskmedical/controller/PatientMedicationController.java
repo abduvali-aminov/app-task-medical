@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("api/v1/patient-medication")
 public class PatientMedicationController {
 
-    final PatientMedicationService patientMedicationService;
+    private final PatientMedicationService patientMedicationService;
 
     public PatientMedicationController(PatientMedicationService patientMedicationService) {
         this.patientMedicationService = patientMedicationService;

@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class MedicationTypeServiceImpl implements MedicationTypeService {
 
-    final
+    private final
     MedicationTypeRepository medicationTypeRepository;
 
     public MedicationTypeServiceImpl(MedicationTypeRepository medicationTypeRepository) {

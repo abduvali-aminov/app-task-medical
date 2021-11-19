@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class PatientServiceImpl implements PatientService {
 
-    final
+    private final
     PatientRepository patientRepository;
 
     public PatientServiceImpl(PatientRepository patientRepository) {

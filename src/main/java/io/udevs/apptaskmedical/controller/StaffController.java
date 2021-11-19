@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/v1/staff")
 public class StaffController {
 
-    final
+    private final
     StaffService staffService;
 
     public StaffController(StaffService staffService) {

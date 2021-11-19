@@ -16,9 +16,9 @@ import java.util.List;
 @Service
 public class PatientMedicationServiceImpl implements PatientMedicationService {
 
-    final PatientMedicationRepository patientMedicationRepository;
-    final MedicationService medicationService;
-    final PatientService patientService;
+    private final PatientMedicationRepository patientMedicationRepository;
+    private final MedicationService medicationService;
+    private final PatientService patientService;
 
     public PatientMedicationServiceImpl(PatientMedicationRepository patientMedicationRepository, MedicationService medicationService, PatientService patientService) {
         this.patientMedicationRepository = patientMedicationRepository;

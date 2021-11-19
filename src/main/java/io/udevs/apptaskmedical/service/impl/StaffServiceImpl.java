@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class StaffServiceImpl implements StaffService {
 
-    final
+    private final
     StaffRepository staffRepository;
 
     public StaffServiceImpl(StaffRepository staffRepository) {

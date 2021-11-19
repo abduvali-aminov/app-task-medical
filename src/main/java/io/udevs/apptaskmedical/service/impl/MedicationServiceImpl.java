@@ -14,10 +14,10 @@ import java.util.List;
 @Service
 public class MedicationServiceImpl implements MedicationService {
 
-    final
+    private final
     MedicationRepository medicationRepository;
 
-    final
+    private final
     MedicationTypeService medicationTypeService;
 
     public MedicationServiceImpl(MedicationRepository medicationRepository, MedicationTypeService medicationTypeService) {

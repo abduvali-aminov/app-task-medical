@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
-    final AppointmentRepository appointmentRepository;
-    final StaffService staffService;
-    final PatientService patientService;
+    private final AppointmentRepository appointmentRepository;
+    private final StaffService staffService;
+    private final PatientService patientService;
 
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, StaffService staffService, PatientService patientService) {
         this.appointmentRepository = appointmentRepository;
