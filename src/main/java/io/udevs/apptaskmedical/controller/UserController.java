@@ -1,5 +1,6 @@
 package io.udevs.apptaskmedical.controller;
 
+import io.udevs.apptaskmedical.dto.request.UserDto;
 import io.udevs.apptaskmedical.entity.User;
 import io.udevs.apptaskmedical.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -19,12 +20,12 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> create(@RequestBody User user){
-        if (!userService.validatePassword(user.getPassword())){
+    public ResponseEntity<?> create(@RequestBody UserDto userDto){
+        if (!userService.validatePassword(userDto.getPassword())){
             return new ResponseEntity<>("Password must be minimum 8 characters!", HttpStatus.BAD_REQUEST);
-        }else if (userService.checkUsername(user.getUserName())){
+        }else if (userService.checkUsername(userDto.getUserName())){
             return new ResponseEntity<>("Username already exist!", HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(userService.create(user));
+        return ResponseEntity.ok(userService.create(userDto));
     }
 }

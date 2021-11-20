@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/appointment", "/api/v1/medication").hasAnyRole(Role.ADMIN.toString(), Role.PATIENT.toString())
+                .antMatchers("/api/v1/appointment", "/api/v1/patient-medication").hasAnyRole(Role.ADMIN.toString(), Role.PATIENT.toString())
                 .antMatchers("/api/v1/*").hasRole(Role.ADMIN.toString())
                 .anyRequest().authenticated()
                 .and()

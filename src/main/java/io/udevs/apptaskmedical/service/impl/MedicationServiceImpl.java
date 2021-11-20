@@ -5,6 +5,7 @@ import io.udevs.apptaskmedical.dto.response.ResponseMessage;
 import io.udevs.apptaskmedical.entity.Medication;
 import io.udevs.apptaskmedical.entity.MedicationType;
 import io.udevs.apptaskmedical.repository.MedicationRepository;
+import io.udevs.apptaskmedical.repository.UserRepository;
 import io.udevs.apptaskmedical.service.MedicationService;
 import io.udevs.apptaskmedical.service.MedicationTypeService;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,10 @@ import java.util.List;
 @Service
 public class MedicationServiceImpl implements MedicationService {
 
-    private final
-    MedicationRepository medicationRepository;
+    private final MedicationRepository medicationRepository;
+    private final MedicationTypeService medicationTypeService;
 
-    private final
-    MedicationTypeService medicationTypeService;
-
-    public MedicationServiceImpl(MedicationRepository medicationRepository, MedicationTypeService medicationTypeService) {
+    public MedicationServiceImpl(MedicationRepository medicationRepository, MedicationTypeService medicationTypeService, UserRepository userRepository) {
         this.medicationRepository = medicationRepository;
         this.medicationTypeService = medicationTypeService;
     }
