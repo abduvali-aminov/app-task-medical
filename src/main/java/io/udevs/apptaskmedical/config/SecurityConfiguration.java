@@ -11,7 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.Md4PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 @Configuration
 @EnableWebSecurity
@@ -24,12 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-        auth
-                .inMemoryAuthentication()
-                .withUser("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN")
-                .and()
-                .withUser("patient").password(passwordEncoder().encode("patient123")).roles("PATIENT");
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -42,15 +42,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/appointment", "/api/v1/patient-medication").hasAnyRole(Role.ADMIN.toString(), Role.PATIENT.toString())
-                .antMatchers("/api/v1/*").hasRole(Role.ADMIN.toString())
+                .antMatchers("/api/v1/appointment", "/api/v1/patient-medication").hasAnyAuthority(Role.ADMIN.toString(), Role.PATIENT.toString())
+                .antMatchers("/api/v1/*").hasAuthority(Role.ADMIN.toString())
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder()  {
         return new BCryptPasswordEncoder();
     }
 }
